@@ -1,0 +1,31 @@
+﻿Acceptance Criteria
+1. User can click a button/link to create invoice.
+* Code is pre-loaded in the file, and the user just needs to click the button to show the invoice form
+2. User can specify customer name, date and invoice number.
+* Fields at the top for customer name, date, and invoice number
+3. User can add multiple line items by selecting products from a product search screen.
+* On the right side, there is a list of products that a user can add to the invoice
+4. Products/line items include Product Name, Quantity, Price, Total
+* Fields with Product Name, Quantity, Price, and Total in the table
+5. Line item fields for Quantity and Price are editable.
+* Product Name, Quantity, and Price are editable
+6. Clicks Save to save the invoice and line items.
+* Save will package all the invoice information on the page, and has it ready to be sent off to the backend through an $http POST request. Upon successful save, the invoice will be emptied. Upon error, the invoice is returned.
+
+
+Additional Questions
+Keep in mind this is a very simple use case but think about it scaling to thousands of users and hundreds of line items on an invoice.
+* Duplicates of line items on the same invoice requires additional memory so making sure they are all unique, and combine duplicates when found
+* Sorting helps with large scale, so sorting line items alphabetically will help for future lookups
+* Searching/filtering through invoices/line items should be added/optimized
+* Adding pagination for queries, especially when invoices can return thousands of results
+* Ensuring your models/databases are set up efficiently
+* Add appropriate validations, and return incorrect invoice with error fields highlighted
+As you think about the architecture consider what an enterprise user with their own business processes would need. How much configurability would you add? Think about usability as well.
+* As each business is different, they may need additional fields to track
+* Perhaps a notes section should be included to give flexibility in adding products
+* Perhaps add specific groupings/bundles that may affect price (e.g., 20% discount when buying 3 or more, or 15% discount when buying product A and product B together)
+* Other edits to pricing (% adjustments like employee discounts, tax)
+How can you reduce clicks?
+* File uploads that can parse a document (csv, excel, etc.) and automatically create an invoice/add inputs
+* Copy/clone existing invoices in the database, make minor adjustments, and submit those (e.g., retrieve last month's invoice, clone it, change the dates, and submit for this month)

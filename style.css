@@ -1,0 +1,33 @@
+#begin-button {
+  margin-top: 10em;
+  text-align: center;
+}
+
+#invoice-container {
+  width: 90em;
+  margin: 3em;
+}
+
+#invoice-form {
+  width: 50em;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#total {
+  left-margin: 4em;
+  text-align: left;
+}
+
+#invoice-buttons {
+  margin: 1em 3em;
+  float: left;
+}
+
+#product-search {
+  width: 30em;
+  margin-left: 2em;
+  display: inline-block;
+  vertical-align: top;
+}

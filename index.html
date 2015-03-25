@@ -1,0 +1,80 @@
+<html ng-app="steelbrick">
+  <head>
+    <title>SteelBrick Invoice App</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="begin-button"><a class="btn btn-success">Begin Invoice</a></div>
+
+    <div id="invoice-container" ng-controller="InvoiceController">
+      <div id="invoice-form" class="container-fluid well">
+        <h3>Please Enter Invoice Information</h3>
+        <br>
+        <form novalidate class="simple-form">
+          <table id="customer_table">
+            <tr><th><h4>Customer Info</h4></th></tr>
+            <tr>
+              <td>Date: </td>
+              <td><input type="text" ng-model="invoice.date"/></td>
+            </tr>
+            <tr>
+              <td>Customer: </td>
+              <td><input type="text" ng-model="invoice.customer"/></td>
+            </tr>
+            <tr>
+              <td>Invoice No: </td>
+              <td><input type="email" ng-model="invoice.id"/></td>
+            </tr>
+          </table>
+          <br>
+          <table id="product_table" class="table">
+            <tr>
+              <th></th>
+              <th>Product Name</th>
+              <th>Qty</th>
+              <th>Cost</th>
+              <th>Total</th>
+            </tr>
+            <tr ng-repeat="item in invoice.items">
+              <td><a ng-click="removeItem(item)">Del</a></td>
+              <td><input ng-model="item.description" placeholder="Description" style="width:20em"></td>
+              <td><input ng-model="item.qty" placeholder="Quantity" style="width:4em"></td>
+              <td><input ng-model="item.cost" placeholder="Cost" style="width:4em"></td>
+              <td>{{item.cost * item.qty | currency}}</td>
+            </tr>
+          </table>
+          <h4 id="total">Grand Total: {{calculate_total() | currency}}</h4>
+          <div id="invoice-buttons">
+            <a class="btn btn-primary" ng-click="addItem()">Add Item</a>
+            <a class="btn btn-success" ng-click="submitInvoice()">Submit Invoice</a>
+            <a class="btn btn-warning" ng-click="resetInvoice()">Reset Invoice</a>
+          </div>
+        </form>
+      </div>
+
+      <div id="product-search" class="container-fluid well">
+        <form class="form-inline">
+          <input class="form-control" type="text" ng-model="query" placeholder="Search products">
+        </form>
+        <table id="search_products" class="table">
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr ng-repeat="product in products| filter:query | orderBy: 'name'">
+            <td>{{product.name}}</td>
+            <td>{{product.cost}}</td>
+            <td><a ng-click="addProduct(product)">Add to Invoice</a></td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
